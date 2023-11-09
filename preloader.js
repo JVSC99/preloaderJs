@@ -1,3 +1,4 @@
+// Create the overlay and SVG elements
 const overlay = document.createElement('div');
 overlay.id = 'loader';
 overlay.style.cssText = `
@@ -13,9 +14,10 @@ overlay.style.cssText = `
     z-index: 999;
 `;
 
-const lottieContainer = document.createElement('div');
-lottieContainer.id = 'lottieContainer';
-lottieContainer.style.cssText = `
+const svgImage = document.createElement('img');
+svgImage.id = 'svgImage';
+svgImage.src = 'https://cdn.jsdelivr.net/gh/jasminder/flutter_preloader/preload.svg';
+svgImage.style.cssText = `
     max-width: 100%;
     max-height: 100%;
     display: none;
@@ -24,26 +26,25 @@ lottieContainer.style.cssText = `
     left: 50%;
     transform: translate(-50%, -50%);
 `;
-lottieContainer.style.display = 'none';
+svgImage.style.display = 'none';
 
+// Append the elements to the body
 document.body.appendChild(overlay);
-document.body.appendChild(lottieContainer);
+document.body.appendChild(svgImage);
 
+// Function to hide the overlay and display the SVG
 function hideOverlay() {
     overlay.style.display = 'none';
-    lottieContainer.style.display = 'block';
-    // Substitua 'seu-arquivo-lottie.json' pelo caminho do seu arquivo Lottie.
-    lottie.loadAnimation({
-        container: lottieContainer,
-        renderer: 'svg', // ou 'canvas' se preferir
-        loop: true,
-        autoplay: true,
-        path: 'https://jvsc99.github.io/preloaderJs/JVGIsylS3F-3.json',
-    });
+    svgImage.style.display = 'block';
 }
 
+// Add an event listener to hide the overlay when all external JS files are loaded
 document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(hideOverlay, 100); // Substitua pelo seu código real de carregamento.
+    // Replace the following lines with the actual code that loads your external JS files
+    // For demonstration purposes, we'll use a setTimeout to simulate loading external JS files.
+    setTimeout(hideOverlay, 100); // Replace with your actual loading code.
 });
 
+// Fallback: If all external resources are loaded and the DOMContentLoaded event doesn't fire,
+// we'll still hide the overlay when the window's load event is triggered.
 window.addEventListener('load', hideOverlay);
